@@ -1,0 +1,168 @@
+openapi: 3.0.0
+info:
+  title: Open API
+  description: Tugas Webservice
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:3000/
+    variables: {}
+paths:
+  /api/belajar:
+    description: Data Resource
+    get:
+      description: Operation to Fetch Data
+      parameters: 
+        - in: query
+          name: nama
+          required: true
+          schema: 
+            type: string
+            example: Uca
+      responses:
+        200:
+          description: Success
+          content: 
+            application/json: 
+              schema: 
+                type: array
+                items: 
+                  properties:
+                    id: 
+                      type: integer
+                      example: 3
+                    nama: 
+                      type: string
+                      example: Wawan
+                    usia: 
+                      type: integer
+                      example: 24
+                    pekerjaan: 
+                      type: string
+                      example: Koki
+    post:
+      description: Add a new data
+      requestBody:
+        content:
+          application/json: 
+            schema:
+              type: object
+              properties:
+                    id: 
+                      type: integer
+                      example: 3
+                    nama: 
+                      type: string
+                      example: Wawan
+                    usia: 
+                      type: integer
+                      example: 24
+                    pekerjaan: 
+                      type: string
+                      example: Koki
+      responses:
+        201: 
+          description: User berhasil ditambahkan
+  /api/belajar/{id}: 
+    description: Get Data Based on Path Parameter
+    get:
+      parameters: 
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200: 
+          description: Success
+          content: 
+            application/json:
+              schema:
+                type: array
+                items: 
+                  properties:
+                    id: 
+                      type: integer
+                      example: 3
+                    nama: 
+                      type: string
+                      example: Wawan
+                    usia: 
+                      type: integer
+                      example: 24
+                    pekerjaan: 
+                      type: string
+                      example: Koki
+    put:
+      description: Update Data Based on Path Parameter
+      parameters: 
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nama: 
+                  type: string
+                usia: 
+                  type: integer
+                pekerjaan: 
+                  type: string
+      responses:
+        200: 
+          description: Success
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User berhasil diperbarui
+    delete:
+      description: Delete Data Based on Path Parameter
+      parameters: 
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200: 
+          description: Success
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User berhasil dihapus
+
+            
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+                        
