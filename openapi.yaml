@@ -101,21 +101,35 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /get-categories/2:
+  /get-categories/{id}:
     get:
       tags:
         - categories
       summary: get by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 2
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /delete-categories/3:
+  /delete-categories/{id}:
     delete:
       tags:
         - categories
       summary: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 3
       security:
         - bearerAuth: []
       responses:
@@ -123,21 +137,27 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /update-categories/2:
+  /update-categories/{id}:
     put:
       tags:
         - categories
       summary: update
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                name: Sci-Fi
-                description: >-
-                  fiksi yang terutama membahas dampak sains aktual atau khayalan
-                  terhadap masyarakat atau individu
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 2
+        - in: body
+          description: Updated category information
+          required: true
+          schema:
+            type: object
+            example:
+              name: Sci-Fi
+              description: >-
+                fiction that primarily deals with the impact of actual or imagined science on society or individuals
       security:
         - bearerAuth: []
       responses:
@@ -179,33 +199,47 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /get-books/2:
+  /get-books/{id}:
     get:
       tags:
         - books
       summary: get by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 2
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /update-books/2:
+  /update-books/{id}:
     put:
       tags:
         - books
       summary: put
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                title: testing
-                author: test
-                year: 2006
-                cover_image: test.jpg
-                categories_id: 2
-                summary: test
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 2
+        - in: body
+          description: Updated book information
+          required: true
+          schema:
+            type: object
+            example:
+              title: testing
+              author: test
+              year: 2006
+              cover_image: test.jpg
+              categories_id: 2
+              summary: test
       security:
         - bearerAuth: []
       responses:
@@ -213,11 +247,18 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /delete-books/2:
+  /delete-books/{id}:
     delete:
       tags:
         - books
       summary: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 2
       security:
         - bearerAuth: []
       responses:
