@@ -1,287 +1,792 @@
-openapi: 3.0.0
-info:
-  title: webservice_js
-  version: 1.0.0
-servers:
-  - url: https://books-server-eight.vercel.app
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-tags:
-  - name: auth
-  - name: categories
-  - name: books
-paths:
-  /registration:
-    post:
-      tags:
-        - auth
-      summary: regis
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                fullname: Uca Ganteng
-                email: ucaganteng@gmail.com
-                username: ucaganteng
-                password: '1234'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /login:
-    post:
-      tags:
-        - auth
-      summary: login
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                username: ucaganteng
-                password: '1234'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /assign-role/2:
-    put:
-      tags:
-        - auth
-      summary: role
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                admin: true
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /insert-categories:
-    post:
-      tags:
-        - categories
-      summary: insert
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                name: Psychological Thriller
-                description: >-
-                  Thriller psikologis adalah genre yang menggabungkan genre
-                  thriller dan fiksi psikologis
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /categories:
-    get:
-      tags:
-        - categories
-      summary: get all
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /get-categories/{id}:
-    get:
-      tags:
-        - categories
-      summary: get by id
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          example: 2
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /delete-categories/{id}:
-    delete:
-      tags:
-        - categories
-      summary: delete
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          example: 3
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /update-categories/{id}:
-    put:
-      tags:
-        - categories
-      summary: update
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          example: 2
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                description:
-                  type: string
-              example:
-                name: Sci-Fi
-                description: 'fiction that primarily deals with the impact of actual or imagined science on society or individuals'
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /insert-books:
-    post:
-      tags:
-        - books
-      summary: insert
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                title: test
-                author: test
-                year: 2002
-                cover_image: test.jpg
-                categories_id: 2
-                summary: test
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /books:
-    get:
-      tags:
-        - books
-      summary: get
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /get-books/{id}:
-    get:
-      tags:
-        - books
-      summary: get by id
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          example: 2
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /update-books/{id}:
-    put:
-      tags:
-        - books
-      summary: put
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          example: 2
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                author:
-                  type: string
-                year:
-                  type: integer
-                cover_image:
-                  type: string
-                categories_id:
-                  type: integer
-                summary:
-                  type: string
-              example:
-                title: testing
-                author: test
-                year: 2006
-                cover_image: test.jpg
-                categories_id: 2
-                summary: test
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /delete-books/{id}:
-    delete:
-      tags:
-        - books
-      summary: delete
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-          example: 2
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
+{
+	"info": {
+		"_postman_id": "f562a052-96a8-4f55-b8b8-9cb7c191a13c",
+		"name": "proyek_pos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27398957"
+	},
+	"item": [
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "post products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Caramel Macchiato\",\r\n        \"description\": \"Minuman kopi khas Italia yang terbuat dari espresso, susu kukus, sirup vanila, dan saus karamel\",\r\n        \"price\": \"28000\",\r\n        \"stock\": 71,\r\n        \"category\": \"2625a2c3-bca0-487a-950f-ea9939c972f1\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/products",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/products",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/products/:id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Biskuit Gandum\",\r\n    \"description\": \"Biskuit yang dibuat dengan gandum utuh\",\r\n    \"price\": \"8000\",\r\n    \"stock\": 20,\r\n    \"category\": \"6e350341-97a9-43b3-a14b-8061e8ad5c2b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/products/:id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/products/:id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user@example.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"user\",\r\n    \"email\": \"user@example.com\",\r\n    \"password\": \"123456\",\r\n    \"phone_number\": \"689876543211\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/auth/register",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "get categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/categories",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get categories by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/categories/:id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bakery\",\r\n    \"description\": \"Kategori untuk Bakery\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/categories",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Juice\",\r\n    \"description\": \"Kategori untuk Minuman Jus\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/categories/:id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete categories",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/categories/:id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"categories",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transactions",
+			"item": [
+				{
+					"name": "get transactions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/transactions",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payment_method\": \"cash\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/transactions",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transactions by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/transactions/:id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"transactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"total_amount\": \"56000\",\r\n    \"payment_method\": \"cash\",\r\n    \"transaction_date\": \"2024-12-16T02:58:42.759Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/transactions/:id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"transactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/transactions/:id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"transactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transaction_items",
+			"item": [
+				{
+					"name": "get transaction_items by id transactions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/transaction-items/:transaction_id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"transaction-items",
+								":transaction_id"
+							],
+							"variable": [
+								{
+									"key": "transaction_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post transaction_items",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transaction_id\": \"9067beae-a106-471c-97e5-2d472f834977\",\r\n    \"product_id\": \"a64b3999-e5eb-4668-b857-bf75c45d52cd\",\r\n    \"quantity\": 2,\r\n    \"unit_price\": \"28000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/transaction-items",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"transaction-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get transactions_item by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEwNzYzOGNmLWFmOGMtNDJkYi1hOWVkLThiMWE4ZGEwNjA0OSIsImVtYWlsIjoiZnVsYW5kaWh1ZHphQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMxMjUyMSwiZXhwIjoxNzM0MzQxMzIxfQ.vEQTb3wpgPQQ2G1G8p75voyMU8cH3NccMq7Fdpc9pzM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://pos-ochre.vercel.app/api/transaction-items/item/:id",
+							"protocol": "https",
+							"host": [
+								"pos-ochre",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"transaction-items",
+								"item",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
